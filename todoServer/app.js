@@ -7,7 +7,9 @@ const todoRouter = require("./routes/todo");
 
 app.use(bodyParser.json());
 
-
+app.use('/', (req, res) => {
+    res.redirect('/user/login');
+});
 app.use("/user", userRouter)
 app.use("/todo", todoRouter)
 
