@@ -1,3 +1,4 @@
+// Home.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CardComponent from './CardComponent';
@@ -39,11 +40,7 @@ const Home = () => {
           authorization: ` ${token}`
         }
       });
-      setData(prevData => 
-        prevData.map(item => 
-          item._id === id ? { ...item, completed: !completed } : item
-        )
-      );
+      setData(prevData => prevData.filter(item => item._id !== id));
     } catch (error) {
       console.error('Error updating todo:', error);
       setError('Failed to update todo');
