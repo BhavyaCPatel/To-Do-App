@@ -54,7 +54,7 @@ export default function SignUp() {
 
     const footer = (
         <>
-            <Button label="Sign-Up" icon="pi pi-sign-in" className='mb-3 bg-green-500 border-green-500' onClick={submit} />
+            <Button label="Sign-Up" icon="pi pi-sign-in" className='mb-3 bg-green-500 border-green-500 custom-button' onClick={submit} />
             <div>
                 <p className='text-white'>Already have an account? <Link to="/login" className='text-blue-500'>Login</Link></p>
             </div>

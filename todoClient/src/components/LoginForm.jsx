@@ -61,7 +61,7 @@ export default function LoginForm() {
 
     const footer = (
         <>
-            <Button label="Login" icon="pi pi-check-circle" className='mb-3 bg-green-500 border-green-500' onClick={submit} />
+            <Button label="Login" icon="pi pi-check-circle" className='mb-3 bg-green-500 border-green-500 custom-button' onClick={submit} />
             <div>
                 <p className='text-white'>Don&apos;t have an account? <Link to="/signup" className='text-blue-500'>Sign Up</Link></p>
             </div>

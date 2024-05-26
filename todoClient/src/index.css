@@ -109,3 +109,12 @@ button:focus {
   background-color: transparent;
   border: 0;
 }
+
+.custom-button {
+  outline: none; /* Remove the outline when the button is not focused */
+}
+
+.custom-button:focus {
+  outline: none; /* Remove the blue ring when the button is focused */
+  box-shadow: none; /* Remove any box-shadow that might appear */
+}

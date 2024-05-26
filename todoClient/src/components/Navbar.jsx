@@ -13,7 +13,7 @@ const Navbar = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('authToken');
-        navigate('/');
+        navigate('/login');
     };
 
     const items = [
@@ -55,7 +55,7 @@ const Navbar = () => {
                     <Button 
                         label="Logout" 
                         icon="pi pi-sign-out" 
-                        className="p-button-danger logout-button" 
+                        className="p-button-danger logout-button custom-button" 
                         onClick={handleLogout} 
                     />
                 )}

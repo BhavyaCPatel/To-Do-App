@@ -19,7 +19,7 @@ const Home = () => {
       const token = localStorage.getItem('authToken');
       const response = await axios.get('http://localhost:3000/todo/all', {
         headers: {
-          authorization: ` ${token}`
+          authorization: `${token}`
         }
       });
       const uncompletedTodos = response.data.todos.filter(todo => !todo.completed);
@@ -32,12 +32,12 @@ const Home = () => {
     }
   };
 
-  const handleCheckboxChange = async (id, completed) => {
+  const handleTrashButtonClick = async (id, completed) => {
     try {
       const token = localStorage.getItem('authToken');
       await axios.put(`http://localhost:3000/todo/update/${id}`, { completed: !completed }, {
         headers: {
-          authorization: ` ${token}`
+          authorization: `${token}`
         }
       });
       setData(prevData => prevData.filter(item => item._id !== id));
@@ -53,9 +53,11 @@ const Home = () => {
         <p>Loading...</p>
       ) : error ? (
         <p>{error}</p>
+      ) : data.length === 0 ? (
+        <h1>No New Tasks</h1>
       ) : (
         data.map(item => (
-          <CardComponent key={item._id} data={item} onCheckboxChange={handleCheckboxChange} />
+          <CardComponent key={item._id} data={item} onTrashButtonClick={handleTrashButtonClick} />
         ))
       )}
     </div>
