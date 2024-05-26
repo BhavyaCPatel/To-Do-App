@@ -1,10 +1,13 @@
 const express = require('express');
 require('dotenv').config();
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const app = express();
 const userRouter = require("./routes/user");
 const todoRouter = require("./routes/todo");
 
+
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/', (req, res) => {

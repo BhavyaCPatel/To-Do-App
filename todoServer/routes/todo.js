@@ -46,7 +46,7 @@ router.put('/update/:todoId', authMiddleware, async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'Invalid User' });
         }
-        const { title, description, dueDate } = req.body;
+        const { title, description, dueDate, completed } = req.body;
         const todoId = req.params.todoId;
         const todo = await Todo.findById(todoId);
 
@@ -61,6 +61,9 @@ router.put('/update/:todoId', authMiddleware, async (req, res) => {
         }
         if (dueDate) {
             todo.dueDate = dueDate;
+        }
+        if (completed) {
+            todo.completed = completed;
         }
 
         const updatedTodo = await todo.save();

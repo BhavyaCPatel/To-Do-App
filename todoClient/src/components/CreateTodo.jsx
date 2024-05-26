@@ -1,10 +1,8 @@
-// import React from 'react'
+import React from 'react'
 
 const CreateTodo = () => {
   return (
-    <div>
-      <form action=""></form>
-    </div>
+    <div>CreateTodo</div>
   )
 }
 

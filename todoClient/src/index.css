@@ -1,8 +1,24 @@
-body{
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
   background-color: black;
-  overflow-x: hidden ;
+  overflow-x: hidden;
   color: white;
 }
+
+a {
+  text-decoration: none;
+}
+a:visited {
+  color: inherit;
+}
+
+button:focus {
+  outline: none;
+}
+
 .gradient {
   background-image: 
     radial-gradient(at 27% 37%,hsla(215, 98%, 61%, 1) 0px,transparent 70%),
@@ -23,9 +39,73 @@ body{
   z-index: -1;
 }
 
-.p-tabmenu-nav{
+.p-tabmenu-nav {
   background-color: transparent;
 }
-.p-tabmenu-nav .p-tabmenuitem .p-menuitem-link{
+.p-tabmenu-nav .p-tabmenuitem .p-menuitem-link {
   background-color: transparent;
+}
+
+.p-card-content .fieldInput {
+  justify-content: center;
+}
+
+.blur-background {
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+  backdrop-filter: blur(10px); /* Blur the background */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  border-radius: 10px; /* Optional: round corners */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Optional: border */
+}
+
+.navbar-wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.user-icon-container {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.logout-button {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 5px;
+  z-index: 10;
+}
+
+.login-button:focus {
+  outline: none;
+}
+
+.content .p-card-body {
+  padding-top: 0px;
+}
+.content .p-card-content {
+  padding-bottom: 0px;
+}
+
+.p-overlaypanel-close {
+  display: none;
+}
+
+.p-overlaypanel-content {
+  background-color: rgb(220 38 38);
+}
+
+.p-overlaypanel-content .p-button {
+  background-color: transparent;
+  border: 0;
 }
