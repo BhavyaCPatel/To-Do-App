@@ -9,7 +9,7 @@ router.post('/create', authMiddleware, async (req, res) => {
     try {
         const { title, description, dueDate } = req.body;
 
-        const user = await User.findOne({ username: req.username });
+        const user = await User.findById(req.userId);
         if (!user) {
             return res.status(404).json({ message: 'Invalid User' });
         }
@@ -27,22 +27,21 @@ router.post('/create', authMiddleware, async (req, res) => {
 
 router.get('/all', authMiddleware, async (req, res) => {
     try {
-        const user = await User.findOne({ username: req.username });
+        const user = await User.findById(req.userId);
         if (!user) {
             return res.status(404).json({ message: 'Invalid User' });
         }
         const todos = await Todo.find({ user: user._id });
-        res.json({todos: todos})
-
+        res.json({ todos });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal server error', error: error });
+        res.status(500).json({ message: 'Internal server error' });
     }
-})
+});
 
 router.put('/update/:todoId', authMiddleware, async (req, res) => {
     try {
-        const user = await User.findOne({ username: req.username });
+        const user = await User.findById(req.userId);
         if (!user) {
             return res.status(404).json({ message: 'Invalid User' });
         }
@@ -78,7 +77,7 @@ router.put('/update/:todoId', authMiddleware, async (req, res) => {
 
 router.delete('/delete/:todoId', authMiddleware, async (req, res) => {
     try {
-        const user = await User.findOne({ username: req.username });
+        const user = await User.findById(req.userId);
         if (!user) {
             return res.status(404).json({ message: 'Invalid User' });
         }

@@ -58,7 +58,7 @@ const Trash = () => {
       ) : error ? (
         <p>{error}</p>
       ) : data.length === 0 ? (
-        <h1>No Tasks Completed</h1>
+        <h1>No Todos Completed</h1>
       ) : (
         data.map(item => (
           <CardComponent key={item._id} data={item} onTrashButtonClick={handleTrashButtonClick} />

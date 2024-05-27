@@ -30,9 +30,6 @@ export default function LoginForm() {
             });
 
             localStorage.setItem('authToken', response.data.token);
-            localStorage.setItem('username', value.username);
-
-            console.log(localStorage);
 
             setValue({
                 username: '',
@@ -51,7 +48,6 @@ export default function LoginForm() {
                 toast.current.show({ severity: 'error', summary: 'Error', detail: 'Invalid username or password', life: 4000 });
             } else {
                 toast.current.show({ severity: 'error', summary: 'Error', detail: 'Try After Sometime', life: 4000 });
-                console.log(error);
             }
         }
     }

@@ -33,7 +33,7 @@ export default function SignUp() {
                     password: value.password
                 }
             });
-            console.log(response)
+            localStorage.setItem('userId', response.data.userId);
             setValue({
                 username: '',
                 email: '',

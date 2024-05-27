@@ -134,7 +134,7 @@ button:focus {
 }
 
 .p-calendar .p-inputtext {
-  width: max-content;
+  width: 200px;
   border-radius: 5px;
   background-color: transparent;
   color: white;
