@@ -28,9 +28,9 @@ const Navbar = () => {
             command: () => { navigate('/create') }
         },
         {
-            label: 'Trash',
-            icon: 'pi pi-trash',
-            command: () => { navigate('/trash') }
+            label: 'Completed',
+            icon: 'pi pi-check-square',
+            command: () => { navigate('/completed') }
         },
         {
             label: 'User',

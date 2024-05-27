@@ -13,7 +13,7 @@ function SubRoutes() {
             <Routes>
                 <Route path="" element={<PrivateRoute><Home /></PrivateRoute>} />
                 <Route path="create" element={<PrivateRoute><CreateTodo /></PrivateRoute>} />
-                <Route path="trash" element={<PrivateRoute><Trash /></PrivateRoute>} />
+                <Route path="completed" element={<PrivateRoute><Trash /></PrivateRoute>} />
                 <Route path="profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
                 <Route path="*" element={<Navigate to="/login" />} />
                 {/* other routes where Navbar should appear */}

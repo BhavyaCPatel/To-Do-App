@@ -1,16 +1,16 @@
-import { Link } from 'react-router-dom';
-import { useState, useRef  } from 'react';
+import { useState, useRef } from 'react';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
+import { InputTextarea } from 'primereact/inputtextarea';
 import { FloatLabel } from "primereact/floatlabel";
 import axios from 'axios';
 import { Toast } from 'primereact/toast';
-import { useNavigate } from 'react-router-dom';
+import { Calendar } from 'primereact/calendar';
+
 export default function CreateTodo() {
 
     const toast = useRef(null);
-    const navigate = useNavigate();
 
     const [value, setValue] = useState({
         title: '',
@@ -19,49 +19,38 @@ export default function CreateTodo() {
     });
 
     const header = (
-        <h2 className='text-center'>Create ToDo</h2>
+        <h2 className='text-center'>Create To-Do</h2>
     );
-    
-    const submit = async() => {
+
+    const submit = async () => {
         try {
-            const response = await axios({
-                method: 'post',
-                url: 'http://localhost:3000/todo/create',
-                data: {
-                    title: value.title,
-                    description: value.description,
-                    dueDate: value.dueDate
+            const token = localStorage.getItem('authToken');
+            await axios.post('http://localhost:4000/todo/create', {
+                title: value.title,
+                description: value.description,
+                dueDate: value.dueDate
+            }, {
+                headers: {
+                    authorization: `${token}`
                 }
             });
-
-            
+    
             setValue({
-                username: '',
-                email: '',
-                password: ''
+                title: '',
+                description: '',
+                dueDate: ''
             });
-            toast.current.show({severity:'success', summary: 'Success', detail: 'User logged in successfully', life: 2000});
-            setTimeout(() => {
-                navigate('/');
-            }, 2000);
-
+            toast.current.show({ severity: 'success', summary: 'Success', detail: 'ToDo created successfully', life: 2000 });
         } catch (error) {
-            if (error.response && error.response.data.message === 'Internal server error') {
-                toast.current.show({severity:'error', summary: 'Error', detail: 'User not found', life: 3000});
-            } else {
-                toast.current.show({severity:'error', summary: 'Error', detail: `Username or Password didn't match`, life: 3000});
-            }
+            toast.current.show({ severity: 'error', summary: 'Error', detail: 'ToDo creation failed', life: 4000 });
         }
     }
 
     const footer = (
         <>
-            <Button label="Login" icon="pi pi-check-circle" className='mb-3 bg-green-500 border-green-500 custom-button' onClick={submit} />
-            <div>
-                <p className='text-white'>Don&apos;t have an account? <Link to="/signup" className='text-blue-500'>Sign Up</Link></p>
-            </div>
+            <Button label="Create" icon="pi pi-check-circle" className='mb-3 bg-green-500 border-green-500 custom-button' onClick={submit} />
         </>
-    );
+    )
 
     const handleChange = (e) => {
         setValue({
@@ -75,20 +64,20 @@ export default function CreateTodo() {
             <Card footer={footer} header={header} className="md:w-25rem text-white blur-background">
                 <div className="flex flex-wrap align-items-center mb-3 p-3 gap-2 fieldInput ">
                     <FloatLabel>
-                        <InputText id="email" value={value.email} onChange={handleChange} className='bg-transparent text-white' />
-                        <label htmlFor="email">Email</label>
+                        <InputText id="title" value={value.title} onChange={handleChange} className='bg-transparent text-white' />
+                        <label htmlFor="title">Title</label>
                     </FloatLabel>
                 </div>
                 <div className="flex flex-wrap align-items-center mb-3 p-3 gap-2 fieldInput ">
                     <FloatLabel>
-                        <InputText id="username" value={value.username} onChange={handleChange} className='bg-transparent text-white' />
-                        <label htmlFor="username">Username</label>
+                        <InputTextarea id="description" value={value.description} onChange={handleChange} className='bg-transparent text-white' rows={3} cols={22} />
+                        <label htmlFor="description">Description</label>
                     </FloatLabel>
                 </div>
                 <div className="flex flex-wrap align-items-center p-3 gap-2 fieldInput ">
                     <FloatLabel>
-                        <InputText id="password" value={value.password} onChange={handleChange} className='bg-transparent text-white' />
-                        <label htmlFor="password">Password</label>
+                        <Calendar autoResize id="dueDate" value={value.dueDate} onChange={handleChange} dateFormat="yy/mm/dd" />
+                        <label htmlFor="dueDate">Due Date</label>
                     </FloatLabel>
                 </div>
             </Card>

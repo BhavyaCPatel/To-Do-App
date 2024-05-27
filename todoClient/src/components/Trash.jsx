@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CardComponent from './CardComponent';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 const Trash = () => {
   const [data, setData] = useState([]);
@@ -16,7 +17,7 @@ const Trash = () => {
     setError(null);
     try {
       const token = localStorage.getItem('authToken');
-      const response = await axios.get('http://localhost:3000/todo/all', {
+      const response = await axios.get('http://localhost:4000/todo/all', {
         headers: {
           authorization: ` ${token}`
         }
@@ -34,12 +35,12 @@ const Trash = () => {
   const handleTrashButtonClick = async (id, completed) => {
     try {
       const token = localStorage.getItem('authToken');
-      await axios.put(`http://localhost:3000/todo/update/${id}`, { completed: !completed }, {
+      await axios.put(`http://localhost:4000/todo/update/${id}`, { completed: !completed }, {
         headers: {
           authorization: ` ${token}`
         }
       });
-      setData(prevData => 
+      setData(prevData =>
         prevData.filter(item => item._id !== id)
       );
     } catch (error) {
@@ -51,7 +52,9 @@ const Trash = () => {
   return (
     <div className='flex flex-col mt-5 p-3'>
       {loading ? (
-        <p>Loading...</p>
+        <div className="card flex justify-content-center">
+          <ProgressSpinner />
+        </div>
       ) : error ? (
         <p>{error}</p>
       ) : data.length === 0 ? (

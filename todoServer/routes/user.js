@@ -64,6 +64,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
+
 router.get('/todos/:userId', authMiddleware, async (req, res) => {
     try {
         const userId = req.params.userId;

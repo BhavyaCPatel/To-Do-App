@@ -1,13 +1,12 @@
-// Home.js
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import CardComponent from './CardComponent';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 const Home = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -17,9 +16,9 @@ const Home = () => {
     setError(null);
     try {
       const token = localStorage.getItem('authToken');
-      const response = await axios.get('http://localhost:3000/todo/all', {
+      const response = await axios.get('http://localhost:4000/todo/all', {
         headers: {
-          authorization: `${token}`
+          authorization: ` ${token}`
         }
       });
       const uncompletedTodos = response.data.todos.filter(todo => !todo.completed);
@@ -30,14 +29,13 @@ const Home = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleTrashButtonClick = async (id, completed) => {
+  }
+  const handleCheckboxChange = async (id, completed) => {
     try {
       const token = localStorage.getItem('authToken');
-      await axios.put(`http://localhost:3000/todo/update/${id}`, { completed: !completed }, {
+      await axios.put(`http://localhost:4000/todo/update/${id}`, { completed: !completed }, {
         headers: {
-          authorization: `${token}`
+          authorization: ` ${token}`
         }
       });
       setData(prevData => prevData.filter(item => item._id !== id));
@@ -46,22 +44,35 @@ const Home = () => {
       setError('Failed to update todo');
     }
   };
+  const handleTrashBtnClicked = async (id) => {
+    try {
+      const token = localStorage.getItem('authToken');
+      await axios.delete(`http://localhost:4000/todo/delete/${id}`, {
+        headers: {
+          authorization: ` ${token}`
+        }
+      });
+      setData(prevData => prevData.filter(item => item._id !== id));
+    } catch (error) {
+      console.error('Error deleting todo:', error);
+      setError('Failed to delete todo');
+    }
+  };
 
   return (
     <div className='flex flex-col mt-5 p-3'>
       {loading ? (
-        <p>Loading...</p>
+        <div className="card flex justify-content-center">
+          <ProgressSpinner />
+        </div>
       ) : error ? (
         <p>{error}</p>
-      ) : data.length === 0 ? (
-        <h1>No New Tasks</h1>
       ) : (
         data.map(item => (
-          <CardComponent key={item._id} data={item} onTrashButtonClick={handleTrashButtonClick} />
+          <CardComponent key={item._id} data={item} onCheckboxChange={handleCheckboxChange} onTrashButtonClick={handleTrashBtnClicked} />
         ))
       )}
     </div>
   );
 };
-
 export default Home;

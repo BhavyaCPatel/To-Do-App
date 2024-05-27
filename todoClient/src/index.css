@@ -118,3 +118,24 @@ button:focus {
   outline: none; /* Remove the blue ring when the button is focused */
   box-shadow: none; /* Remove any box-shadow that might appear */
 }
+
+.p-calendar .p-datepicker-trigger {
+  border-radius: 10px;
+  left: -34px;
+  background-color: transparent;
+  color: gray;
+  border: 0;
+  padding: 5px;
+}
+
+.p-fluid .p-inputtext {
+  width: max-content;
+  border-radius: 5px;
+}
+
+.p-calendar .p-inputtext {
+  width: max-content;
+  border-radius: 5px;
+  background-color: transparent;
+  color: white;
+}
