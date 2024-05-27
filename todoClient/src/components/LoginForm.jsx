@@ -33,7 +33,6 @@ export default function LoginForm() {
                     password: value.password
                 }
             });
-            console.log(response.data.token)
 
             localStorage.setItem('authToken', response.data.token);
             localStorage.setItem('username', value.username)
@@ -47,7 +46,7 @@ export default function LoginForm() {
             });
             toast.current.show({severity:'success', summary: 'Success', detail: 'User logged in successfully', life: 2000});
             setTimeout(() => {
-                navigate('/home');
+                navigate('/');
             }, 2000);
 
         } catch (error) {

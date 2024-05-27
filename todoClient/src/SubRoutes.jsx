@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import CreateTodo from './components/CreateTodo';
@@ -11,10 +11,11 @@ function SubRoutes() {
         <>
             <Navbar />
             <Routes>
-                <Route path="home" element={<PrivateRoute><Home /></PrivateRoute>} />
+                <Route path="" element={<PrivateRoute><Home /></PrivateRoute>} />
                 <Route path="create" element={<PrivateRoute><CreateTodo /></PrivateRoute>} />
                 <Route path="trash" element={<PrivateRoute><Trash /></PrivateRoute>} />
                 <Route path="profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+                <Route path="*" element={<Navigate to="/login" />} />
                 {/* other routes where Navbar should appear */}
             </Routes>
         </>

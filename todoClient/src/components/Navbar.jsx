@@ -20,7 +20,7 @@ const Navbar = () => {
         {
             label: 'Home',
             icon: 'pi pi-home',
-            command: () => { navigate('/home') }
+            command: () => { navigate('/') }
         },
         {
             label: 'Todos',
