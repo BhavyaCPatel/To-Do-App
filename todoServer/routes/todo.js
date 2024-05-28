@@ -18,7 +18,7 @@ router.post('/create', authMiddleware, async (req, res) => {
         await User.findByIdAndUpdate(user._id, { $push: { todos: todo._id } });
 
         res.json({ todo });
-        
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error', error: error });
@@ -36,6 +36,18 @@ router.get('/all', authMiddleware, async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+router.get('/:id', authMiddleware, async (req, res) => {
+    try {
+        const todo = await Todo.findById(req.params.id);
+        if (!todo) {
+            return res.status(404).json({ message: 'Todo not found' });
+        }
+        res.json(todo);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
     }
 });
 
@@ -89,7 +101,7 @@ router.delete('/delete/:todoId', authMiddleware, async (req, res) => {
         await Todo.findByIdAndDelete(todoId);
         await User.findByIdAndUpdate(user._id, { $unset: { todos: todo._id } });
         res.json({ message: 'Todo deleted successfully' });
-        } catch (error) {
+    } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error', error: error });
     }

@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CardComponent from './CardComponent';
 import { ProgressSpinner } from 'primereact/progressspinner';
+import { useLocation } from 'react-router-dom';
 
-const Trash = () => {
+const Completed = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const location = useLocation();
+  const currentPage = location.pathname;
 
   useEffect(() => {
     fetchData();
@@ -61,11 +65,11 @@ const Trash = () => {
         <h1>No Todos Completed</h1>
       ) : (
         data.map(item => (
-          <CardComponent key={item._id} data={item} onTrashButtonClick={handleTrashButtonClick} />
+          <CardComponent key={item._id} data={item} onTrashButtonClick={handleTrashButtonClick} isTrashPage={currentPage === '/completed'} />
         ))
       )}
     </div>
   );
 };
 
-export default Trash;
+export default Completed;

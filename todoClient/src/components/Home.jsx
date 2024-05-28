@@ -58,6 +58,20 @@ const Home = () => {
       setError('Failed to delete todo');
     }
   };
+  const handleEditBtnClicked = async (id, updatedData) => {
+    try {
+      const token = localStorage.getItem('authToken');
+      await axios.put(`http://localhost:4000/todo/update/${id}`, updatedData, {
+        headers: {
+          authorization: ` ${token}`
+        }
+      });
+      setData(prevData => prevData.map(item => item._id === id ? {...item, ...updatedData} : item));
+    } catch (error) {
+      console.error('Error updating todo:', error);
+      setError('Failed to update todo');
+    }
+  };
 
   return (
     <div className='flex flex-col mt-5 p-3'>
@@ -71,7 +85,7 @@ const Home = () => {
         <h1>No Todos Created</h1>
       ) : (
         data.map(item => (
-          <CardComponent key={item._id} data={item} onCheckboxChange={handleCheckboxChange} onTrashButtonClick={handleTrashBtnClicked} />
+          <CardComponent key={item._id} data={item} onCheckboxChange={handleCheckboxChange} onTrashButtonClick={handleTrashBtnClicked} onEditButtonClick={handleEditBtnClicked} />
         ))
       )}
     </div>

@@ -39,6 +39,15 @@ button:focus {
   z-index: -1;
 }
 
+::-webkit-scrollbar{
+  width: 15px;
+  background: black;
+}
+::-webkit-scrollbar-thumb{
+  background-color: #2196F3;
+  border-radius: 10px;
+}
+
 .p-tabmenu-nav {
   background-color: transparent;
 }
