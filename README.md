@@ -27,4 +27,4 @@ Welcome to the Full Stack Todo App! This application allows users to manage thei
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/fullstack-todo-app.git
+   [git clone https://github.com/yourusername/fullstack-todo-app.git](https://github.com/BhavyaCPatel/To-Do-App.git)
