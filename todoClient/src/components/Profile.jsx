@@ -24,7 +24,7 @@ export default function Profile() {
         try {
             const token = localStorage.getItem('authToken');
             // const userId = localStorage.getItem('userId');
-            const response = await axios.get(`http://localhost:4000/user/details/`, {
+            const response = await axios.get(`http://localhost:5000/user/details/`, {
                 headers: {
                     authorization: token
                 }
@@ -49,7 +49,7 @@ export default function Profile() {
         try {
             const token = localStorage.getItem('authToken');
             const userId = localStorage.getItem('userId')
-            await axios.put(`http://localhost:4000/user/profile/`, {
+            await axios.put(`http://localhost:5000/user/profile/`, {
                 username: userData.username,
                 email: userData.email
             }, {

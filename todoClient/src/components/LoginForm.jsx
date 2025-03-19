@@ -24,7 +24,7 @@ export default function LoginForm() {
     
     const submit = async () => {
         try {
-            const response = await axios.post('http://localhost:4000/user/login', {
+            const response = await axios.post('http://localhost:5000/user/login', {
                 username: value.username,
                 password: value.password
             });
@@ -43,11 +43,11 @@ export default function LoginForm() {
 
         } catch (error) {
             if (error.response && error.response.status === 404) {
-                toast.current.show({ severity: 'error', summary: 'Error', detail: 'User not found', life: 4000 });
+                toast.current.show({ severity: 'error', summary: 'Error', detail: 'User not found', life: 5000 });
             } else if (error.response && error.response.status === 401) {
-                toast.current.show({ severity: 'error', summary: 'Error', detail: 'Invalid username or password', life: 4000 });
+                toast.current.show({ severity: 'error', summary: 'Error', detail: 'Invalid username or password', life: 5000 });
             } else {
-                toast.current.show({ severity: 'error', summary: 'Error', detail: 'Try After Sometime', life: 4000 });
+                toast.current.show({ severity: 'error', summary: 'Error', detail: 'Try After Sometime', life: 5000 });
             }
         }
     }

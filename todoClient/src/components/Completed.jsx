@@ -21,7 +21,7 @@ const Completed = () => {
     setError(null);
     try {
       const token = localStorage.getItem('authToken');
-      const response = await axios.get('http://localhost:4000/todo/all', {
+      const response = await axios.get('http://localhost:5000/todo/all', {
         headers: {
           authorization: ` ${token}`
         }
@@ -39,7 +39,7 @@ const Completed = () => {
   const handleTrashButtonClick = async (id, completed) => {
     try {
       const token = localStorage.getItem('authToken');
-      await axios.put(`http://localhost:4000/todo/update/${id}`, { completed: !completed }, {
+      await axios.put(`http://localhost:5000/todo/update/${id}`, { completed: !completed }, {
         headers: {
           authorization: ` ${token}`
         }

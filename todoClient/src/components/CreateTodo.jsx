@@ -29,7 +29,7 @@ export default function CreateTodo() {
     const fetchTodoData = async (id) => {
         try {
             const token = localStorage.getItem('authToken');
-            const response = await axios.get(`http://localhost:4000/todo/${id}`, {
+            const response = await axios.get(`http://localhost:5000/todo/${id}`, {
                 headers: {
                     authorization: `${token}`
                 }
@@ -40,7 +40,7 @@ export default function CreateTodo() {
                 dueDate: new Date(response.data.dueDate)
             });
         } catch (error) {
-            toast.current.show({ severity: 'error', summary: 'Error', detail: 'Failed to fetch todo data', life: 4000 });
+            toast.current.show({ severity: 'error', summary: 'Error', detail: 'Failed to fetch todo data', life: 5000 });
         }
     };
 
@@ -48,7 +48,7 @@ export default function CreateTodo() {
         try {
             const token = localStorage.getItem('authToken');
             if (id) {
-                await axios.put(`http://localhost:4000/todo/update/${id}`, {
+                await axios.put(`http://localhost:5000/todo/update/${id}`, {
                     title: value.title,
                     description: value.description,
                     dueDate: value.dueDate
@@ -59,7 +59,7 @@ export default function CreateTodo() {
                 });
                 toast.current.show({ severity: 'success', summary: 'Success', detail: 'ToDo updated successfully', life: 2000 });
             } else {
-                await axios.post('http://localhost:4000/todo/create', {
+                await axios.post('http://localhost:5000/todo/create', {
                     title: value.title,
                     description: value.description,
                     dueDate: value.dueDate
@@ -72,7 +72,7 @@ export default function CreateTodo() {
             }
             setTimeout(() => navigate('/'), 2000);
         } catch (error) {
-            toast.current.show({ severity: 'error', summary: 'Error', detail: 'ToDo creation/update failed', life: 4000 });
+            toast.current.show({ severity: 'error', summary: 'Error', detail: 'ToDo creation/update failed', life: 5000 });
         }
     }
 

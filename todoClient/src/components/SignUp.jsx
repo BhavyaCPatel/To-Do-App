@@ -26,7 +26,7 @@ export default function SignUp() {
         try {
             const response = await axios({
                 method: 'post',
-                url: 'http://localhost:4000/user/signup',
+                url: 'http://localhost:5000/user/signup',
                 data: {
                     username: value.username,
                     email: value.email,
@@ -39,15 +39,15 @@ export default function SignUp() {
                 email: '',
                 password: ''
             });
-            toast.current.show({severity:'success', summary: 'Success', detail: 'User signed up successfully', life: 4000});
+            toast.current.show({severity:'success', summary: 'Success', detail: 'User signed up successfully', life: 5000});
             setTimeout(() => {
                 navigate('/login');
-            }, 4000);
+            }, 5000);
         } catch (error) {
             if (error.response && error.response.data.message === 'User already exists') {
-                toast.current.show({severity:'error', summary: 'Error', detail: 'User already exists', life: 4000});
+                toast.current.show({severity:'error', summary: 'Error', detail: 'User already exists', life: 5000});
             } else {
-                toast.current.show({severity:'error', summary: 'Error', detail: 'Sign up failed', life: 4000});
+                toast.current.show({severity:'error', summary: 'Error', detail: 'Sign up failed', life: 5000});
             }
         }
     }
